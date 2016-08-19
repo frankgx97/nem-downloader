@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">下载地址</div>
+    <div class="panel-body">
+      {% for i in song_list %}
+      <div class="song_info">
+        <span>{{i.title}}</span><br><br>
+        <span>{{i.artist}}</span><br><br>
+        <span>{{i.album}}</span>
+      </div>
+      <div class="song_cover">
+        <img src="{{i.cover_url}}" width="65%">
+      </div>
+      <br>
+      <a href="{{i.mp3_url}}" class="btn btn-raised btn-success">下载</a>
+      <hr>
+      {% endfor %}
+    </div>
+</div>

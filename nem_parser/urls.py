@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'parse.views.index', name = 'index'),
     url(r'^about/','parse.views.about', name = 'about'),
+    url(r'^playlist/','parse.views.play_list', name = 'list'),
+    url(r'^album/','parse.views.album', name = 'album')
 ]

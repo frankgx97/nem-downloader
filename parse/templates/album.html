@@ -4,10 +4,10 @@
     {% include 'header.html' %}
     <div class="container">
       <div class="jumbotron">
-        <h3>单曲</h3>
-        <form action="/" method="get">
-          <input type="text" class="form-control floating-label" name="url" placeholder="请将歌曲URL粘贴在这里">  
-          <span class="help-block">URL形如<code>http://music.163.com/#/song?id=22635188</code>如有疑问请看<a href="/about">这里</a></span>
+        <h3>专辑</h3>
+        <form action="/album" method="get">
+          <input type="text" class="form-control floating-label" name="url" placeholder="请将专辑URL粘贴在这里">  
+          <span class="help-block">URL形如<code>http://music.163.com/#/album?id=2075029</code>如有疑问请看<a href="/about">这里</a></span>
           <input type="submit" class="btn btn-raised btn-primary"></input>
         </form>
         <br>
@@ -19,7 +19,7 @@
         <span class="label label-danger">非法的URL</span>
         {% endif %}
         {% if id_legal == False %}
-        <span class="label label-danger">非法的歌曲ID</span>
+        <span class="label label-danger">非法的专辑ID</span>
         {% endif %}
       </div>
     </div>

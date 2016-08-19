@@ -4,9 +4,20 @@ from django.http import HttpResponse
 import re
 
 from api import *
-from song import *
 
 # Create your views here.
+
+def verify_url(url,url_type):
+    pattern = re.compile(r'http:\/\/music\.163\.com\/#\/' + url_type + '\?id=[0-9]+')#判断输入的url符合规则
+    pattern2 = re.compile(r'http:\/\/music\.163\.com\/#\/' + url_type + '\?id=[0-9]+[^\d]+')#如果正常url后面跟有非数字的字符>
+    if re.match(pattern,url) and not re.match(pattern2,url):
+        return True
+    else:
+        return False
+
+def url_split(url):
+    pattern = re.compile(r'=')
+    return re.split(pattern,url)[1]
 
 def index (request):
     url = request.GET.get('url',-1)
@@ -14,42 +25,100 @@ def index (request):
         return render(request, 'index.html')
     ne = NetEase()
     #先判断传入的参数是否为url或id，如果是url则切割为id，如果为id则直接传入，都不是则报错
-    pattern = re.compile(r'http:\/\/music\.163\.com\/#\/song\?id=[0-9]+')#判断输入的url符合规则
-    pattern2 = re.compile(r'http:\/\/music\.163\.com\/#\/song\?id=[0-9]+[^\d]+')#如果正常url后面跟有非数字的字符也会被上面的表达式匹配
-    url_valid = re.match(pattern,url) and not re.match(pattern2,url)#如url匹配第一个表达式且不匹配第二个表达式则有效
+    url_valid = verify_url(url, 'song')
     id_legal = True
     if url_valid:
-        pattern = re.compile(r'=')
-        song_id = re.split(pattern,url)[1]
+        song_id = url_split(url)
         valid = True
         url_legal = True
     else:
         valid = False
-        song_id = 0
         url_legal = False
+        song_id = 0
+    song_list = []
     if valid and url_legal:
-        mp3_url = ne.songs_detail_new_api([song_id])[0]['url']
         try:
-            s = Song(song_id)
-            title = s.title
-            artist = s.artist
-            album = s.album_title
-            cover_url = s.album_cover_url
+            i = ne.song_detail(song_id)[0]
+            song_item = {
+                    'id':i['id'],
+                    'title':i['name'],
+                    'artist':i['artists'][0]['name'],
+                    'album':i['album']['name'],
+                    'cover_url':i['album']['picUrl'],
+                    'mp3_url':ne.songs_detail_new_api([i['id']])[0]['url']
+                    }
+            song_list.append(song_item)
         except:
-            mp3_url = ''
-            title = ''
-            artist = ''
-            album = ''
-            cover_url = ''
             id_legal = False
             valid = False
-    else:
-        mp3_url = ''
-        title = ''
-        artist = ''
-        album = ''
-        cover_url = ''
-    return render(request, 'index.html',{'mp3_url': mp3_url,'valid':valid,'url_legal':url_legal,'id_legal':id_legal,'title':title,'artist':artist,'album':album,'cover_url':cover_url})
+    return render(request, 'index.html', {'valid':valid, 'url_legal':url_legal, 'id_legal':id_legal, 'song_list':song_list})
 
 def about(request):
     return render(request,'about.html')
+
+def play_list(request):
+    url = request.GET.get('url',-1)
+    if url == -1:
+        return render(request, 'list.html')
+    ne = NetEase()
+    url_valid = verify_url(url, 'playlist')
+    id_legal =True
+    if url_valid:
+        playlist_id = url_split(url)
+        valid = True
+        url_legal = True
+    else:
+        valid = False
+        url_legal = False
+        playlist_id = 0
+    song_list = []
+    if valid and url_legal:
+        try:
+            for i in ne.playlist_detail(playlist_id):
+                song_item = {
+                        'id':i['id'],
+                        'title':i['name'],
+                        'artist':i['artists'][0]['name'],
+                        'album':i['album']['name'],
+                        'cover_url':i['album']['picUrl'],
+                        'mp3_url':ne.songs_detail_new_api([i['id']])[0]['url']
+                        }
+                song_list.append(song_item)
+        except:
+            id_legal = False
+            valid = False
+    return render(request, 'list.html', {'valid':valid, 'url_legal':url_legal, 'id_legal':id_legal, 'song_list':song_list})
+
+def album(request):
+    url = request.GET.get('url',-1)
+    if url == -1:
+        return render(request, 'album.html')
+    ne = NetEase()
+    url_valid = verify_url(url, 'album')
+    id_legal =True
+    if url_valid:
+        album_id = url_split(url)
+        valid = True
+        url_legal = True
+    else:
+        valid = False
+        url_legal = False
+        album_id = 0
+    song_list = []
+    if valid and url_legal:
+        try:
+            for i in ne.album(album_id):
+                song_item = {
+                        'id':i['id'],
+                        'title':i['name'],
+                        'artist':i['artists'][0]['name'],
+                        'album':i['album']['name'],
+                        'cover_url':i['album']['picUrl'],
+                        'mp3_url':ne.songs_detail_new_api([i['id']])[0]['url']
+                        }
+                song_list.append(song_item)
+        except:
+            id_legal = False
+            valid = False
+    return render(request, 'album.html', {'valid':valid, 'url_legal':url_legal, 'id_legal':id_legal, 'song_list':song_list})
+
