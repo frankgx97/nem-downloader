@@ -2,6 +2,8 @@
 <span>由于2016年网易云音乐的API变化，由旧API解析出的mp3文件URL全部失效。因此我基于musicbox项目中封装的新版API制作了这个下载器，用于通过歌曲，歌单或专辑id解析及下载mp3文件。</span><br>
 <span><strong>本站生成的下载地址仅限使用中国大陆境内IP下载，否则将返回404。</strong></span><br>
 <span>API相关文档请移步<a href="https://github.com/darknessomi/musicbox/wiki">https://github.com/darknessomi/musicbox/wiki/</a></span>
+<h3>DEMO</h3>
+<a href="http://nem-downloader.nyan.im/">
 <h3>关于URL格式</h3>
 <span>网易云音乐的URL格式有很多种，例如：</span><br>
 <span>http://music.163.com/#/my/m/music/playlist?id=3756532（歌单）</span><br>
