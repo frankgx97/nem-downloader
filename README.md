@@ -3,7 +3,7 @@
 <span><strong>本站生成的下载地址仅限使用中国大陆境内IP下载，否则将返回404。</strong></span><br>
 <span>API相关文档请移步<a href="https://github.com/darknessomi/musicbox/wiki">https://github.com/darknessomi/musicbox/wiki/</a></span>
 <h3>DEMO</h3>
-<a href="http://nem-downloader.nyan.im/">
+<a href="http://nem-downloader.nyan.im/">http://nem-downloader.nyan.im/</a>
 <h3>关于URL格式</h3>
 <span>网易云音乐的URL格式有很多种，例如：</span><br>
 <span>http://music.163.com/#/my/m/music/playlist?id=3756532（歌单）</span><br>
