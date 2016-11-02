@@ -56,6 +56,9 @@ def index (request):
 def about(request):
     return render(request,'about.html')
 
+def error(request):
+    return render(request,'error.html')
+
 def play_list(request):
     url = request.GET.get('url',-1)
     if url == -1:

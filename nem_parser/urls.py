@@ -18,8 +18,11 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'parse.views.index', name = 'index'),
-    url(r'^about/','parse.views.about', name = 'about'),
-    url(r'^playlist/','parse.views.play_list', name = 'list'),
-    url(r'^album/','parse.views.album', name = 'album')
+    url(r'^$', "parse.views.index", name = 'index'),
+    url(r'^about/',"parse.views.about", name = 'about'),
+    url(r'^playlist/$',"parse.views.play_list", name = 'list'),
+    url(r'^album/$',"parse.views.album", name = 'album'),
+    url(r'^None/',"parse.views.error", name = 'error'),
+    url(r'^album/None/$',"parse.views.error", name = 'error_album'),
+    url(r'^playlist/None/$',"parse.views.error", name = 'error_playlist')
 ]
