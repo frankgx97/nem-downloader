@@ -4,6 +4,7 @@
 <span><strong>请将本服务部署在中国境内，或者连接至中国境内的代理。否则API返回的下载地址全部为<code>None</code></strong></span><br>
 <span><strong>本项目运行在django1.8.4</strong></span><br>
 <span><code>pip install django==1.8.4</code></span><br>
+<span>部署前请先执行<code>python manage.py collectstatic</code>收集静态文件</span><br>
 <span>API相关文档请移步<a href="https://github.com/darknessomi/musicbox/wiki">https://github.com/darknessomi/musicbox/wiki/</a></span><br>
 <h3>DEMO</h3>
 <a href="http://nem-downloader.nyan.im/">http://nem-downloader.nyan.im/</a>
