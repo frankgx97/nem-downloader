@@ -1,3 +1,4 @@
 *.pyc
 nem_parser.log
 uwsgi.ini
+collected_static/
