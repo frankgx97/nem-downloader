@@ -1,1 +1,3 @@
 *.pyc
+nem_parser.log
+uwsgi.ini
