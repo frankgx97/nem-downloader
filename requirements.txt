@@ -1,0 +1,4 @@
+requests==2.13.0
+Django==1.9.13
+pycrypto==2.6.1
+beautifulsoup4==4.6.0
