@@ -1,0 +1,18 @@
+{
+    "listeners": {
+        "*:8093": {
+            "application": "nem"
+        }
+    },
+
+    "applications": {
+        "nem": {
+            "type": "python",
+            "workers": 2,
+            "path": "/www",
+            "module": "wsgi",
+            "user": "root",
+            "group": "root"
+        }
+    }
+}
