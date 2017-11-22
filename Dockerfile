@@ -1,25 +1,14 @@
-FROM nyanim/nginx-unit
-ENV UNIT_VERSION 0.1
+FROM python:2.7-alpine
 
-WORKDIR /www
+WORKDIR /usr/src/app
 
 COPY . .
 
-RUN apt update \
-&& apt install -y python-pip nginx-light \
-&& pip install -r requirements.txt \
-&& python manage.py collectstatic --noinput \
-&& cp ngx.conf /etc/nginx/sites-enabled/ \
-&& service nginx restart \
-&& service unitd start \
-&& curl -X PUT -d @/www/unit.json --unix-socket /var/run/control.unit.sock http://localhost/ \
-&& service unitd dumpconfig 
+RUN pip install --no-cache-dir -r requirements.txt \
+&& python manage.py collectstatic --noinput
+ 
 
-EXPOSE 8092
+EXPOSE 8000
 
-CMD service nginx restart \
-&& service unitd stop \
-&& rm /var/run/control.unit.sock \
-&& service unitd start \
-&& curl -X PUT -d @/www/unit.json --unix-socket /var/run/control.unit.sock http://localhost/ \
-&& tail -F -n0 /etc/hosts \
+CMD cd /usr/src/app \
+&& python manage.py runserver 8000
