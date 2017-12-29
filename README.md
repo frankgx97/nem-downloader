@@ -2,9 +2,9 @@
 <span>由于2016年网易云音乐的API变化，由旧API解析出的mp3文件URL全部失效。因此我基于musicbox项目中封装的新版API制作了这个下载器，用于通过歌曲，歌单或专辑id解析及下载mp3文件。</span><br>
 <span><strong>本站生成的下载地址仅限使用中国大陆境内IP下载，否则将返回404。</strong></span><br>
 <span><strong>请将本服务部署在中国境内，或者连接至中国境内的代理。否则API返回的下载地址全部为<code>None</code></strong></span><br>
-<span><strong>本项目运行在django1.8.4</strong></span><br>
-<span><code>pip install django==1.8.4</code></span><br>
-<span>部署前请先执行<code>python manage.py collectstatic</code>收集静态文件</span><br>
+<h3>部署</h3>
+<code>docker run --name=nem -p 8000:8000 nyanim/nem-downloader</code>
+手动部署请参考Dockerfile
 <span>API相关文档请移步<a href="https://github.com/darknessomi/musicbox/wiki">https://github.com/darknessomi/musicbox/wiki/</a></span><br>
 <h3>DEMO</h3>
 <a href="http://nem-downloader.nyan.im/">http://nem-downloader.nyan.im/</a>
@@ -14,7 +14,7 @@
 <span>http://music.163.com/song/22635188/?userid=xxxxxxx（歌曲）</span><br>
 <span><strong>本站仅接受形为http://music.163.com/#/[song|playlist|album]?id=[0-9]+的URL，如果为其他格式请自行修改。</strong></span>
 <h3>关于我</h3>
-<a href="http://i.nyan.im/">http://i.nyan.im</a>
+<a href="https://blog.nyan.im/me">https://blog.nyan.im/me</a>
 <h3>鸣谢</h3>
 <span><a href="https://github.com/darknessomi/musicbox">musicbox</a> 高品质网易云音乐命令行版本，简洁优雅，丝般顺滑，基于Python编写。</span><br>
 <h3>开放源代码</h3>
