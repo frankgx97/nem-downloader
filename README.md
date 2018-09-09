@@ -6,15 +6,25 @@
 ```
 docker run --name=nem -p 8000:8000 nyanim/nem-downloader
 ```
+或
+```
+docker-compose up
+```
 手动部署请参考Dockerfile
+
 API相关文档请移步https://github.com/darknessomi/musicbox/wiki
-### DEMO
+### Demo
 http://nem-downloader.nyan.im/
+
 ### 关于URL格式
 网易云音乐的URL格式有很多种，例如：
-http://music.163.com/#/my/m/music/playlist?id=3756532（歌单）
-http://music.163.com/song/22635188/?userid=xxxxxxx（歌曲）
-本站仅接受形为http://music.163.com/#/[song|playlist|album]?id=[0-9]+的URL，如果为其他格式请自行修改。
+
+http://music.163.com/#/my/m/music/playlist?id=3756532 （歌单）
+
+http://music.163.com/song/22635188/?userid=xxxxxxx （歌曲）
+
+本站仅接受形为http://music.163.com/#/[song|playlist|album]?id=[0-9]+ 的URL，如果为其他格式请自行修改。
+
 ### 关于我
 https://blog.nyan.im/me
 ### 鸣谢
