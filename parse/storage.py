@@ -4,20 +4,28 @@
 '''
 Class to stores everything into a json file.
 '''
+from __future__ import (
+    print_function, unicode_literals, division, absolute_import
+)
+
 import json
 
-from const import Constant
-from singleton import Singleton
+from future.builtins import open
+
+from .const import Constant
+from .singleton import Singleton
+from .utils import utf8_data_to_file
 
 
 class Storage(Singleton):
+
     def __init__(self):
         '''
         Database stores every info.
 
         version int
-        #if value in file is unequal to value defined in this class.
-        #An database update will be applied.
+        # if value in file is unequal to value defined in this class.
+        # An database update will be applied.
         user dict:
             username str
             key str
@@ -35,14 +43,13 @@ class Storage(Singleton):
                 song_name str
                 mp3_url str
                 album_name str
+                album_id str
                 quality str
                 lyric str
                 tlyric str
         player_info dict:
-            player_list list:
-                songs_id(int)
-            playing_list list:
-                songs_id(int)
+            player_list list[dict]
+            playing_order list[int]
             playing_mode int
             playing_offset int
 
@@ -52,22 +59,21 @@ class Storage(Singleton):
         if hasattr(self, '_init'):
             return
         self._init = True
-        self.version = 4
+
         self.database = {
-            'version': 4,
             'user': {
                 'username': '',
                 'password': '',
                 'user_id': '',
                 'nickname': '',
             },
-            'collections': [[]],
+            'collections': [],
             'songs': {},
             'player_info': {
                 'player_list': [],
                 'player_list_type': '',
                 'player_list_title': '',
-                'playing_list': [],
+                'playing_order': [],
                 'playing_mode': 0,
                 'idx': 0,
                 'ridx': 0,
@@ -76,39 +82,36 @@ class Storage(Singleton):
         }
         self.storage_path = Constant.storage_path
         self.cookie_path = Constant.cookie_path
-        self.file = None
+
+    def login(self, username, password, userid, nickname):
+        self.database['user'] = dict(
+            username=username,
+            password=password,
+            user_id=userid,
+            nickname=nickname
+        )
+
+    def logout(self):
+        self.database['user'] = {
+            'username': '',
+            'password': '',
+            'user_id': '',
+            'nickname': '',
+        }
 
     def load(self):
         try:
-            self.file = file(self.storage_path, 'r')
-            self.database = json.loads(self.file.read())
-            self.file.close()
-        except (ValueError, OSError, IOError):
-            self.__init__()
-        if not self.check_version():
-            self.save()
-
-    def check_version(self):
-        if self.database['version'] == self.version:
-            return True
-        else:
-            # Should do some update.
-            if self.database['version'] == 1:
-                self.database['version'] = 2
-                self.database['cache'] = False
-            elif self.database['version'] == 2:
-                self.database['version'] = 3
-                self.database.pop('cache')
-            elif self.database['version'] == 3:
-                self.database['version'] = 4
-                self.database['user'] = {'username': '',
-                                         'password': '',
-                                         'user_id': '',
-                                         'nickname': ''}
-            self.check_version()
-            return False
+            with open(self.storage_path, 'r') as f:
+                for k, v in json.load(f).items():
+                    if isinstance(self.database[k], dict):
+                        self.database[k].update(v)
+                    else:
+                        self.database[k] = v
+        except (OSError, KeyError, ValueError) as e:
+            pass
+        self.save()
 
     def save(self):
-        self.file = file(self.storage_path, 'w')
-        self.file.write(json.dumps(self.database))
-        self.file.close()
+        with open(self.storage_path, 'w') as f:
+            data = json.dumps(self.database)
+            utf8_data_to_file(f, data)

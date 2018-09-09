@@ -19,6 +19,16 @@ def url_split(url):
     pattern = re.compile(r'=')
     return re.split(pattern,url)[1]
 
+def get_song_item(i):
+    return {
+        'id':i['id'],
+        'title':i['name'],
+        'artist':i['ar'][0]['name'],
+        'album':i['al']['name'],
+        'cover_url':i['al']['picUrl'],
+        'mp3_url':'http://music.163.com/song/media/outer/url?id={}.mp3'.format(i['id']) 
+    }
+
 def index (request):
     url = request.GET.get('url',-1)
     if url == -1:
@@ -38,15 +48,8 @@ def index (request):
     song_list = []
     if valid and url_legal:
         try:
-            i = ne.song_detail(song_id)[0]
-            song_item = {
-                    'id':i['id'],
-                    'title':i['name'],
-                    'artist':i['artists'][0]['name'],
-                    'album':i['album']['name'],
-                    'cover_url':i['album']['picUrl'],
-                    'mp3_url':ne.songs_detail_new_api([i['id']])[0]['url']
-                    }
+            i = ne.songs_detail([song_id])[0]
+            song_item = get_song_item(i)
             song_list.append(song_item)
         except:
             id_legal = False
@@ -78,14 +81,7 @@ def play_list(request):
     if valid and url_legal:
         try:
             for i in ne.playlist_detail(playlist_id):
-                song_item = {
-                        'id':i['id'],
-                        'title':i['name'],
-                        'artist':i['artists'][0]['name'],
-                        'album':i['album']['name'],
-                        'cover_url':i['album']['picUrl'],
-                        'mp3_url':ne.songs_detail_new_api([i['id']])[0]['url']
-                        }
+                song_item = get_song_item(i)
                 song_list.append(song_item)
         except:
             id_legal = False
@@ -111,14 +107,7 @@ def album(request):
     if valid and url_legal:
         try:
             for i in ne.album(album_id):
-                song_item = {
-                        'id':i['id'],
-                        'title':i['name'],
-                        'artist':i['artists'][0]['name'],
-                        'album':i['album']['name'],
-                        'cover_url':i['album']['picUrl'],
-                        'mp3_url':ne.songs_detail_new_api([i['id']])[0]['url']
-                        }
+                song_item = get_song_item(i)
                 song_list.append(song_item)
         except:
             id_legal = False
