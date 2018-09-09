@@ -10,7 +10,10 @@ RUN set -ex  \
 && apk add --no-cache  --virtual .build-deps gcc autoconf g++ make libffi-dev openssl-dev python-dev\
 && pip install --no-cache-dir -i https://mirrors.ustc.edu.cn/pypi/web/simple -r requirements.txt \
 && python manage.py collectstatic --noinput \
-&& apk del .build-deps
+&& apk del .build-deps \
+&& mkdir /root/.netease-musicbox/ \
+&& touch /root/.netease-musicbox/musicbox.log \
+&& echo "#LWP-Cookies-2.0" > /root/.netease-musicbox/cookie
  
 EXPOSE 8000
 
