@@ -15,9 +15,9 @@ RUN set -ex  \
 && touch /root/.netease-musicbox/musicbox.log \
 && echo "#LWP-Cookies-2.0" > /root/.netease-musicbox/cookie
  
-EXPOSE 8000
+EXPOSE 80
 
 CMD cd /usr/src/app \
 && exec gunicorn nem_parser.wsgi:application \
-    --bind 0.0.0.0:8000 \
+    --bind 0.0.0.0:80 \
     --workers 1
