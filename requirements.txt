@@ -1,7 +1,7 @@
 Django==1.8.4
 beautifulsoup4==4.6.0
 gunicorn==19.6.0
-whitenoise==4.0b4
+whitenoise==4.0
 requests
 requests-cache
 pycryptodomex
