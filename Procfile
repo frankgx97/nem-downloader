@@ -1,1 +1,1 @@
-web gunicorn gunicorn nem_parser.wsgi
+web gunicorn nem_parser.wsgi
