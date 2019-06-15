@@ -15,7 +15,8 @@ RUN set -ex  \
 && touch /root/.netease-musicbox/musicbox.log \
 && mkdir /usr/src/app/.netease-musicbox/ \
 && touch /usr/src/app/.netease-musicbox/musicbox.log \
-&& echo "#LWP-Cookies-2.0" > /root/.netease-musicbox/cookie
+&& echo "#LWP-Cookies-2.0" > /root/.netease-musicbox/cookie \
+&& echo "#LWP-Cookies-2.0" > /usr/src/app/.netease-musicbox/cookie
  
 EXPOSE 80
 
