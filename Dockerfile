@@ -13,6 +13,8 @@ RUN set -ex  \
 && apt autoremove -y \ 
 && mkdir /root/.netease-musicbox/ \
 && touch /root/.netease-musicbox/musicbox.log \
+&& mkdir /usr/src/app/.netease-musicbox/ \
+&& touch /usr/src/app/.netease-musicbox/musicbox.log \
 && echo "#LWP-Cookies-2.0" > /root/.netease-musicbox/cookie
  
 EXPOSE 80
