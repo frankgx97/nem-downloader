@@ -3,4 +3,4 @@ services:
   web:
     image: nyanim/nem-downloader:latest
     ports:
-     - "8000:8000"
+     - "80:80"
