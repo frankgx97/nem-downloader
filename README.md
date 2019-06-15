@@ -4,7 +4,7 @@
 请将本服务部署在中国境内，或者连接至中国境内的代理。否则API返回的下载地址全部为`None`
 ### 部署
 ```
-docker run --name=nem -p 8000:8000 nyanim/nem-downloader
+docker run --name=nem -p 80:80 nyanim/nem-downloader
 ```
 或
 ```
@@ -14,6 +14,7 @@ docker-compose up
 
 API相关文档请移步https://github.com/darknessomi/musicbox/wiki
 ### Demo
+https://nem-downloader.herokuapp.com/
 http://nem-downloader.nyan.im/
 
 ### 关于URL格式
