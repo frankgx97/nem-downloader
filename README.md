@@ -12,7 +12,9 @@ docker run --name=nem -p 80:80 nyanim/nem-downloader
 docker-compose up
 ```
 或
+
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 手动部署请参考Dockerfile
 
 API相关文档请移步https://github.com/darknessomi/musicbox/wiki
