@@ -1,0 +1,7 @@
+{
+  "name": "Nem Downloader",
+  "description": "A tool to parse url of songs on netease music",
+  "repository": "https://github.com/nyanim/nem-downloader/",
+  "logo": "https://cambrian-images.cdn.bcebos.com/f05e1a3612a5a62e91258d9a6fcfab1c_1582028769404989.jpeg",
+  "keywords": ["netease", "django", "python"]
+}
