@@ -1,6 +1,6 @@
 version: '3'
 services:
   web:
-    image: nyanim/nem-downloader:latest
+    image: i1ssqspchlg9gh4/nem-downloader:latest
     ports:
      - "80:80"
