@@ -5,7 +5,7 @@
 
 ### 部署
 ```
-docker run --name=nem -p 80:80 nyanim/nem-downloader
+docker run --name=nem -p 80:80 i1ssqspchlg9gh4/nem-downloader
 ```
 或
 ```
