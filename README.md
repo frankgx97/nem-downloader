@@ -5,7 +5,7 @@
 
 ### 部署
 ```
-docker run --name=nem -p 80:80 i1ssqspchlg9gh4/nem-downloader
+docker run --name=nem -p 80:80 ghcr.io/frankgx97/nem-downloader:master
 ```
 或
 ```
@@ -19,7 +19,7 @@ docker-compose up
 
 API相关文档请移步https://github.com/darknessomi/musicbox/wiki
 ### Demo
-https://nem-downloader.herokuapp.com/
+https://nemdl.nyan.im/
 
 ### 关于URL格式
 网易云音乐的URL格式有很多种，例如：
@@ -31,6 +31,6 @@ http://music.163.com/song/22635188/?userid=xxxxxxx （歌曲）
 本站仅接受形为http://music.163.com/#/[song|playlist|album]?id=[0-9]+ 的URL，如果为其他格式请自行修改。
 
 ### 关于我
-https://blog.nyan.im/me
+https://nyan.im/me
 ### 鸣谢
 [musicbox](https://github.com/darknessomi/musicbox)高品质网易云音乐命令行版本，简洁优雅，丝般顺滑，基于Python编写。
