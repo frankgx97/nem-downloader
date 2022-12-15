@@ -14,14 +14,11 @@ from collections import OrderedDict
 from http.cookiejar import LWPCookieJar
 
 import requests
-import requests_cache
 
 from .config import Config
 from .storage import Storage
 from .encrypt import encrypted_request
 from . import logger
-
-requests_cache.install_cache('nemcache', expire_after=3600)
 
 log = logger.getLogger(__name__)
 
