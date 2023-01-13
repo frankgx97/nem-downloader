@@ -1,0 +1,12 @@
+build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - tag=${CI_COMMIT_BRANCH}-$(date +"%Y%m%d%H%M%S")
+    - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+    - docker buildx create --use
+    - docker buildx build --pull --tag ${CI_REGISTRY_IMAGE}:$tag --tag ${CI_REGISTRY_IMAGE}:latest --platform linux/amd64,linux/arm64 --push .
