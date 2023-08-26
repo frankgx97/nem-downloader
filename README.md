@@ -19,7 +19,7 @@ docker-compose up
 
 API相关文档请移步https://github.com/darknessomi/musicbox/wiki
 ### Demo
-https://nemdl.nyan.im/
+https://nemdl.fly.dev/
 
 ### 关于URL格式
 网易云音乐的URL格式有很多种，例如：
